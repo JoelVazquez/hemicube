@@ -1,11 +1,11 @@
 #include <GLFW/glfw3.h>
-#include <iostream>
+#include "Game.h"
 
-const int windowsHeight = 720;
-const int windowsWidth = 1280;
-const char *windowsName = "yo que se...";
+const int Height = 720;
+const int Width = 1280;
+const char *Name = "yo que se...";
 GLFWwindow* windows = NULL;
-
+Game* game;
 
 void displayCallback()
 {
@@ -14,30 +14,26 @@ void displayCallback()
 	glfwSwapBuffers(windows);
 }
 
+
 void KeyboardCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+	{
 
 		glfwSetWindowShouldClose(window, GLFW_TRUE);
+	}
+	else 
+
+		game->handleKey(key, action);
 
 }
-
-
-
-
 
 void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
 {
 	glfwGetCursorPos(window, &xpos, &ypos);
-
-	glfwSetCursorPos(window, windowsWidth / 2, windowsHeight / 2);
+	std::cout << "mouse pos: (" << xpos << ", " << ypos << ")"<< std::endl;
+	glfwSetCursorPos(window, Width / 2, Height / 2);
 }
-
-void reshapeCallback(int width, int height)
-{
-
-}
-
 
 void init()
 {
@@ -52,61 +48,43 @@ void init()
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	// Window and OpenGL context glfwGetPrimaryMonitor()
-	windows = glfwCreateWindow(windowsWidth, windowsHeight, windowsName, NULL, NULL);
+	// Window and OpenGL context
+	windows = glfwCreateWindow(Width, Height, Name, NULL/*glfwGetPrimaryMonitor()*/, NULL);
 	if (windows == NULL){
 		fprintf(stderr, "Failed to open GLFW window.\n");
 		glfwTerminate();
 		return;
 	}
 	glfwMakeContextCurrent(windows);
-
+	// Capture the escape key being pressed below
 	glfwSetInputMode(windows, GLFW_STICKY_KEYS, GL_TRUE);
-	//glfwSetInputMode(windows, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-	glfwSetCursorPos(windows, windowsWidth / 2, windowsHeight / 2);
+	glfwSetInputMode(windows, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glfwSetCursorPos(windows, Width / 2, Height / 2);
 	// Callback
 	glfwSetCursorPosCallback(windows, cursor_position_callback);
 	glfwSetKeyCallback(windows, KeyboardCallback);
 
 }
 
-void run()
-{
-	double delta_time, delta_time_drwa, last, current;
-	glfwSetTime(0);
-	current = 0;
-	last = glfwGetTime();
-	delta_time_drwa = 0;
-
-	do{
-
-		current = glfwGetTime();
-		delta_time = current - last;
-		delta_time_drwa += delta_time;
-		last = current;
-
-		if (delta_time_drwa > 1 / 60)
-		{
-
-			delta_time_drwa = 0;
-			displayCallback();
-		}
-
-		glfwPollEvents();
-
-	} while (glfwGetKey(windows, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
-		glfwWindowShouldClose(windows) == 0);
-	glfwTerminate();
-}
-
-
-
-
-
-int main(void)
+int main(int argc, char const *argv[])
 {
 	init();
-	run();
+	game = new Game();
+	glfwSetTime(0);
+	double previous = glfwGetTime();
+	double lag = 0.0;
+	do
+	{
+		//Process input
+		double current = glfwGetTime();
+		double elapsed = current - previous;
+		previous = current;
+		lag += elapsed;
+		game->update(lag);
+		game->render();
+		glfwPollEvents();
+	} while (!glfwWindowShouldClose(windows));
+	glfwTerminate();
 	return 0;
 }
 
