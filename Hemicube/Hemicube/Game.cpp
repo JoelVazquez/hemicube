@@ -2,7 +2,7 @@
 
 GLuint VertexArrayID;
 GLuint programID;
-glm::mat4 MVP;
+glm::mat4 MVP, MVP2;
 GLuint MatrixID;
 GLuint vertexbuffer;
 GLuint colorbuffer;
@@ -33,46 +33,26 @@ void State1::enter(Game* game)
 		glm::vec3(0, 0, 0), // and looks at the origin
 		glm::vec3(0, 1, 0)  // Head is up (set to 0,-1,0 to look upside-down)
 		);
+
+	glm::mat4 View2 = glm::lookAt(
+		glm::vec3(4, -3, -3), // Camera is at (4,3,-3), in World Space
+		glm::vec3(0, 0, 0), // and looks at the origin
+		glm::vec3(0, 1, 0)  // Head is up (set to 0,-1,0 to look upside-down)
+		);
 	// Model matrix : an identity matrix (model will be at the origin)
 	glm::mat4 Model = glm::mat4(1.0f);
 	// Our ModelViewProjection : multiplication of our 3 matrices
 	MVP = Projection * View * Model; // Remember, matrix multiplication is the other way around
-
+	MVP2 = Projection * View2 * Model;
 	// Our vertices. Tree consecutive floats give a 3D vertex; Three consecutive vertices give a triangle.
 	// A cube has 6 faces with 2 triangles each, so this makes 6*2=12 triangles, and 12*3 vertices
 	
-
 	
 	glGenBuffers(1, &vertexbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
-
-
-	glGenBuffers(1, &colorbuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buffer_data), g_color_buffer_data, GL_STATIC_DRAW);
-
-
-};
-
-void State1::update()
-{
-	std::cout << "update from state 1" << std::endl;
-	//game->current_state = new State2();
-	//game->current_state->enter(this->game);
-	// Clear the screen
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	// Use our shader
-	glUseProgram(programID);
-
-	// Send our transformation to the currently bound shader, 
-	// in the "MVP" uniform
-	glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
-
 	// 1rst attribute buffer : vertices
 	glEnableVertexAttribArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
 	glVertexAttribPointer(
 		0,                  // attribute. No particular reason for 0, but must match the layout in the shader.
 		3,                  // size
@@ -82,9 +62,11 @@ void State1::update()
 		(void*)0            // array buffer offset
 		);
 
+	glGenBuffers(1, &colorbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buffer_data), g_color_buffer_data, GL_STATIC_DRAW);
 	// 2nd attribute buffer : colors
 	glEnableVertexAttribArray(1);
-	glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
 	glVertexAttribPointer(
 		1,                                // attribute. No particular reason for 1, but must match the layout in the shader.
 		3,                                // size
@@ -93,12 +75,18 @@ void State1::update()
 		0,                                // stride
 		(void*)0                          // array buffer offset
 		);
+	// Use our shader
+	glUseProgram(programID);
 
+};
+
+void State1::update()
+{
+	glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	// Draw the triangle !
+	glBindVertexArray(VertexArrayID);
 	glDrawArrays(GL_TRIANGLES, 0, 12 * 3); // 12*3 indices starting at 0 -> 12 triangles
-
-	glDisableVertexAttribArray(0);
-	glDisableVertexAttribArray(1);
 
 };
 
@@ -114,9 +102,11 @@ void State2::enter(Game* game)
 
 void State2::update()
 {
-	std::cout << "update from state 2" << std::endl;
-	game->current_state = new State1();
-	game->current_state->enter(this->game);
+	glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP2[0][0]);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	// Draw the triangle !
+	glBindVertexArray(VertexArrayID);
+	glDrawArrays(GL_TRIANGLES, 0, 12 * 3); // 12*3 indices starting at 0 -> 12 triangles
 };
 
 void State2::leave()
@@ -134,7 +124,7 @@ void Game::update(double &lag)
 {
 	while (lag >= MS_PER_UPDATE)
 	{
-		current_state->update();
+		//current_state->update();
 		lag -= MS_PER_UPDATE;
 	}
 }
@@ -145,6 +135,10 @@ void Game::handleKey(int &key, int &action)
 		std::cout << "handleKey: W press" << std::endl;
 	if (key == GLFW_KEY_UP && action == GLFW_PRESS)
 		std::cout << "handleKey: UP press" << std::endl;
+	if (key == GLFW_KEY_1 && action == GLFW_PRESS)
+		this->current_state = new State1();
+	if (key == GLFW_KEY_2 && action == GLFW_PRESS)
+		this->current_state = new State2();
 }
 
 void Game::handleCursorPos(double &xpos, double &ypos)
@@ -154,6 +148,7 @@ void Game::handleCursorPos(double &xpos, double &ypos)
 
 void Game::render()
 {
+	current_state->update();
 	//std::cout << "render" << std::endl;
 }
 
