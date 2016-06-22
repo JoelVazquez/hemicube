@@ -20,7 +20,7 @@ void State1::enter(Game* game)
 	glBindVertexArray(VertexArrayID);
 
 	// Create and compile our GLSL program from the shaders
-	programID = LoadShaders("TransformVertexShader.vertexshader", "ColorFragmentShader.fragmentshader");
+	programID = LoadShaders("../TransformVertexShader.vertexshader", "../ColorFragmentShader.fragmentshader");
 
 	// Get a handle for our "MVP" uniform
 	MatrixID = glGetUniformLocation(programID, "MVP");
