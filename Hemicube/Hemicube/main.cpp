@@ -1,4 +1,3 @@
-#include <GLFW/glfw3.h>
 #include "Game.h"
 
 const int Height = 720;
@@ -44,6 +43,7 @@ void init()
 		return;
 	}
 
+
 	glfwWindowHint(GLFW_SAMPLES, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -56,6 +56,15 @@ void init()
 		return;
 	}
 	glfwMakeContextCurrent(windows);
+	// Initialize GLEW
+	glewExperimental = true; // Needed for core profile
+	if (glewInit() != GLEW_OK) {
+		fprintf(stderr, "Failed to initialize GLEW\n");
+		getchar();
+		glfwTerminate();
+	}
+
+
 	// Capture the escape key being pressed below
 	glfwSetInputMode(windows, GLFW_STICKY_KEYS, GL_TRUE);
 	glfwSetInputMode(windows, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
@@ -83,6 +92,8 @@ int main(int argc, char const *argv[])
 		game->update(lag);
 		game->render();
 		glfwPollEvents();
+		// Swap buffers
+		glfwSwapBuffers(windows);
 	} while (!glfwWindowShouldClose(windows));
 	glfwTerminate();
 	return 0;

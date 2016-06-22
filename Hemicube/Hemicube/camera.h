@@ -1,4 +1,5 @@
-#pragma once
+#ifndef camera_HPP
+#define camera_HPP
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 
@@ -22,3 +23,4 @@ private:
 	glm::vec2 mousePosition;
 };
 
+#endif
