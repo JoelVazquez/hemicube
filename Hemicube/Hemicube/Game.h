@@ -9,8 +9,9 @@ public:
 	Game();
 	void update(double &lag);
 	void handleKey(int &key, int &action);
+	void handleCursorPos(double &xpos, double &ypos);
 	void render();
-	class State *current;
+	class State *current_state;
 	~Game();
 private:
 	
@@ -20,25 +21,30 @@ private:
 class State
 {
 public:
-
-	virtual void update(Game* game) = 0;
+	virtual void enter(Game* game) = 0;
+	virtual void update() = 0;
+	virtual void leave() = 0;
 
 };
 
 class State1 :public State
 {
 public:
-	State1(int loco) { l=loco; };
-	void update(Game* game) ;
+	void enter(Game* game);
+	void update();
+	void leave();
 private:
-	int l;
+	Game* game;
 };
 
 class State2: public State
 {
 public:
-
-	void update(Game* game);
+	void enter(Game* game);
+	void update();
+	void leave();
+private:
+	Game* game;
 
 };
 

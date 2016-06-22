@@ -31,7 +31,7 @@ void KeyboardCallback(GLFWwindow* window, int key, int scancode, int action, int
 void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
 {
 	glfwGetCursorPos(window, &xpos, &ypos);
-	std::cout << "mouse pos: (" << xpos << ", " << ypos << ")"<< std::endl;
+	game->handleCursorPos(xpos, ypos);
 	glfwSetCursorPos(window, Width / 2, Height / 2);
 }
 
