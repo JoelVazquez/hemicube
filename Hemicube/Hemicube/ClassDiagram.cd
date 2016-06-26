@@ -1,28 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="State1" Collapsed="true">
-    <Position X="3.5" Y="7.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJBAAAAAAEAAA=</HashCode>
-      <FileName>Game.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="State2" Collapsed="true">
-    <Position X="6.5" Y="7.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJBAAAAAAEAAA=</HashCode>
-      <FileName>Game.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="State" Collapsed="true">
-    <Position X="4.75" Y="5.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBAAAAAAEAAA=</HashCode>
-      <FileName>Game.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Game">
-    <Position X="1.5" Y="4.75" Width="1.5" />
+  <Class Name="Game" Collapsed="true">
+    <Position X="1.5" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAACAAAAAAAAAAAAABAAiAAAAAQAAAAAAWAAA=</HashCode>
       <FileName>Game.h</FileName>
@@ -31,12 +10,53 @@
       <Field Name="current_state" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="camera">
-    <Position X="9.5" Y="4" Width="2.25" />
+  <Class Name="camera" Collapsed="true">
+    <Position X="9.25" Y="3.25" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
       <HashCode>QAIAAQAAAwBAAAAAAAABAgAgACAAAEAAIAAAAADAAAA=</HashCode>
       <FileName>camera.h</FileName>
     </TypeIdentifier>
+  </Class>
+  <Class Name="IGameState" Collapsed="true">
+    <Position X="4.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAACAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>IGameState.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayingState" Collapsed="true">
+    <Position X="3" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACQAAAAAAAAAAIIAAAAAAABAAQAgAAAAABAAAAAAEgQ=</HashCode>
+      <FileName>PlayingState.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Maya" Collapsed="true">
+    <Position X="10.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAIAAAAAA=</HashCode>
+      <FileName>Maya.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model" Collapsed="true">
+    <Position X="8.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>Model.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Scene" Collapsed="true">
+    <Position X="6.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQACACAACAAgAAgAAAIAAAQAAAAAAAAAAAEABAAAA=</HashCode>
+      <FileName>Scene.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="m_pCamera" />
+    </ShowAsAssociation>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
