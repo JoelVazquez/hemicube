@@ -3,6 +3,7 @@
 
 Scene::Scene()
 {
+	m_pCamera = new camera();
 }
 
 void Scene::Render()
@@ -35,11 +36,12 @@ void Scene::AddCamera(camera *pCamera)
 {
 }
 
-/*camera * Scene::GetCamera()
+camera * Scene::GetCamera()
 {
+	return m_pCamera;
 }
 
-Model* Scene::GetPlayer()
+/*Model* Scene::GetPlayer()
 {
 }
 

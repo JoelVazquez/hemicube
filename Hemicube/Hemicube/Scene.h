@@ -16,7 +16,7 @@ public:
 	void AddModel(std::string name);
 	void LoadMaya(const char *pPath);
 	void AddCamera(camera *pCamera);
-	//camera * GetCamera();
+	camera * GetCamera();
 	//Model* GetPlayer();
 	//std::vector<Model*> GetModels();
 	~Scene();

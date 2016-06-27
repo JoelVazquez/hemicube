@@ -18,7 +18,9 @@ private:
 	unsigned int m_VertexsSize;
 	GLuint m_ProgramID;
 	glm::mat4 m_MVP;
+	glm::mat4 m_MW;
 	GLuint m_MatrixID;
+	GLuint m_MatrixMWID;
 	GLuint m_VertexArrayID;
 	GLuint m_VertexBuffer;
 	GLuint m_NormalBuffer;
