@@ -12,6 +12,7 @@ class PlayingState :
 		PlayingState(Game* pGame);
 		void Update();
 		void Render();
+		void handleKey(int &key, int &action) override;
 		~PlayingState();
 	private:
 		Game* m_pGame;
