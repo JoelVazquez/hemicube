@@ -3,7 +3,7 @@
 
 Scene::Scene()
 {
-	m_pCamera = new camera();
+	m_pCamera = new Camera();
 }
 
 void Scene::Render()
@@ -34,11 +34,11 @@ void Scene::LoadMaya(const char *pPath)
 	m_Mayas[std::string(pPath)] = new Maya(vertices, uvs, normals);
 }
 
-void Scene::AddCamera(camera *pCamera)
+void Scene::AddCamera(Camera *pCamera)
 {
 }
 
-camera * Scene::GetCamera()
+Camera * Scene::GetCamera()
 {
 	return m_pCamera;
 }
