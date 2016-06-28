@@ -11,7 +11,8 @@ class PlayingState :
 	public:
 		PlayingState(Game* pGame);
 		void Update();
-		void Render();
+		void Render(double deltaTime);
+		void HandleMouse(double deltaX, double deltaY) override;
 		void handleKey(int &key, int &action) override;
 		~PlayingState();
 	private:

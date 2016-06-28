@@ -15,28 +15,7 @@ PlayingState::PlayingState(Game* pGame)
 
 void PlayingState::handleKey(int &key, int &action)
 {
-	if (key == GLFW_KEY_W && action == GLFW_PRESS)
-	{
-		std::cout << "handleKey: W press" << std::endl;
-		m_pScene->GetCamera()->KeyPressed('w');
-	}
-	if (key == GLFW_KEY_S && action == GLFW_PRESS)
-	{
-		std::cout << "handleKey: S press" << std::endl;
-		m_pScene->GetCamera()->KeyPressed('s');
-	}
-	if (key == GLFW_KEY_D && action == GLFW_PRESS)
-	{
-		std::cout << "handleKey: D press" << std::endl;
-		m_pScene->GetCamera()->KeyPressed('d');
-	}
-	if (key == GLFW_KEY_A && action == GLFW_PRESS)
-	{
-		std::cout << "handleKey: A press" << std::endl;
-		m_pScene->GetCamera()->KeyPressed('a');
-	}
-	if (key == GLFW_KEY_UP && action == GLFW_PRESS)
-		std::cout << "handleKey: UP press" << std::endl;
+	m_pScene->GetCamera()->KeyPressed(key,action);
 	/*if (key == GLFW_KEY_1 && action == GLFW_PRESS)
 		this->current_state = new PlayingState(this);*/
 
@@ -45,9 +24,13 @@ void PlayingState::handleKey(int &key, int &action)
 void PlayingState::Update()
 {
 }
-
-void PlayingState::Render()
+void PlayingState::HandleMouse(double deltaX, double deltaY)
 {
+	m_pScene->GetCamera()->MouseMove(deltaX, deltaY);
+}
+void PlayingState::Render(double deltaTime)
+{
+	m_pScene->GetCamera()->UpdateView(deltaTime);
 	m_pScene->Render();
 }
 

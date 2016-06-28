@@ -1,7 +1,6 @@
 #include "Game.h"
 
-const int Height = 720;
-const int Width = 1280;
+
 const char *Name = "yo que se...";
 GLFWwindow* windows = NULL;
 Game* game;
@@ -90,7 +89,7 @@ int main(int argc, char const *argv[])
 		previous = current;
 		lag += elapsed;
 		game->update(lag);
-		game->render();
+		game->render(elapsed);
 		glfwPollEvents();
 		// Swap buffers
 		glfwSwapBuffers(windows);

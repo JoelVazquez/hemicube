@@ -25,12 +25,13 @@ void Game::handleKey(int &key, int &action)
 
 void Game::handleCursorPos(double &xpos, double &ypos)
 {
-	std::cout << "mouse pos: (" << xpos << ", " << ypos << ")" << std::endl;
+	current_state->HandleMouse(xpos - Width/2, ypos - Height/2);
+	std::cout << "mouse pos: (" << xpos << ", " << ypos - Height / 2 << ")" << std::endl;
 }
 
-void Game::render()
+void Game::render(double deltaTime)
 {
-	current_state->Render();
+	current_state->Render(deltaTime);
 	//std::cout << "render" << std::endl;
 }
 
