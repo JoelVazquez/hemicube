@@ -15,8 +15,8 @@ public:
 	void AddPlayer(std::string name);
 	void AddModel(std::string name);
 	void LoadMaya(const char *pPath);
-	void AddCamera(Camera *pCamera);
-	Camera * GetCamera();
+	void AddCamera(camera *pCamera);
+	camera * GetCamera();
 	//Model* GetPlayer();
 	//std::vector<Model*> GetModels();
 	~Scene();
@@ -24,7 +24,7 @@ private:
 	std::vector<Model*> m_Models;
 	Model *m_Player;
 	std::map<std::string, Maya*> m_Mayas;
-	Camera *m_pCamera;
+	camera *m_pCamera;
 	ObjLoader m_Loader;
 };
 

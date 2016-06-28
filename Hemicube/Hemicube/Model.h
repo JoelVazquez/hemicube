@@ -5,7 +5,7 @@ class Model
 {
 public:
 	Model(Maya* pMaya);
-	void Draw();
+	void Draw(glm::mat4 vP);
 	~Model();
 private:
 	Maya* m_pMaya;
