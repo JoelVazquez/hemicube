@@ -17,10 +17,10 @@ glm::mat4 camera::GetViewMatrix()
 
 void camera::KeyPressed(int &key, int &action)
 {
-	m_IsKeyPressed[key] = (action == GLFW_PRESS) ? true: false;	
+	m_IsKeyPressed[key] = (action == GLFW_PRESS || action == GLFW_REPEAT) ? true : false;
 }
 
-#include <iostream>
+
 
 void camera::MouseMove(double deltaX, double deltaY)
 {
@@ -30,13 +30,13 @@ void camera::MouseMove(double deltaX, double deltaY)
 	//mousePosition is the last mouse position
 	//glm::vec2 mouse_delta = glm::vec2(x, y) - mousePosition;
 
-	const float mouseX_Sensitivity = 0.05f;
-	const float mouseY_Sensitivity = 0.05f;
+	const float mouseX_Sensitivity = 0.005f;
+	const float mouseY_Sensitivity = 0.005f;
 	//note that yaw and pitch must be converted to radians.
 	//this is done in UpdateView() by glm::rotate
 	yaw += (float) mouseX_Sensitivity * deltaX;
 	pitch += (float) mouseY_Sensitivity * deltaY;
-	std::cout << yaw << std::endl;
+
 	//mousePosition = glm::vec2(x, y);
 	//UpdateView();
 }

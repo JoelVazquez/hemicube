@@ -76,10 +76,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
     <None Include="ClassDiagram.cd" />
     <None Include="..\ColorFragmentShader.fragmentshader" />
     <None Include="..\TransformVertexShader.vertexshader" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Hemicube.rc">
