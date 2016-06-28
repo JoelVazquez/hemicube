@@ -18,7 +18,12 @@ void Game::update(double &lag)
 
 void Game::handleKey(int &key, int &action)
 {
-	current_state->handleKey(key, action);
+	if (key == GLFW_KEY_W && action == GLFW_PRESS)
+		std::cout << "handleKey: W press" << std::endl;
+	if (key == GLFW_KEY_UP && action == GLFW_PRESS)
+		std::cout << "handleKey: UP press" << std::endl;
+	if (key == GLFW_KEY_1 && action == GLFW_PRESS)
+		this->current_state = new PlayingState(this);
 	//if (key == GLFW_KEY_2 && action == GLFW_PRESS)
 		//this->current_state = new State2();
 }

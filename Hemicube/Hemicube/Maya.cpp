@@ -17,20 +17,20 @@ Maya::Maya(std::vector<glm::vec3> & vertices,
 					m_MatrixID = glGetUniformLocation(m_ProgramID, "MVP");
 					m_MatrixMWID = glGetUniformLocation(m_ProgramID, "MW");
 					// Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
-					/*glm::mat4 projection = glm::perspective(45.0f, 4.0f / 3.0f, 0.1f, 100.0f);
+					glm::mat4 projection = glm::perspective(45.0f, 4.0f / 3.0f, 0.1f, 100.0f);
 					// Camera matrix
 					glm::mat4 view = glm::lookAt(
 						glm::vec3(4, 3, -3), // Camera is at (4,3,-3), in World Space
 						glm::vec3(0, 0, 0), // and looks at the origin
 						glm::vec3(0, 1, 0)  // Head is up (set to 0,-1,0 to look upside-down)
-						);*/
+						);
 
 					// Model matrix : an identity matrix (model will be at the origin)
 					glm::mat4 model = glm::mat4(1.0f);
-					//model = glm::rotate(model, 160.f, glm::vec3(0.f, 0.f, 1.f));
-					//model = glm::translate(model, glm::vec3(10.f, 0.f, 1.f));
+					model = glm::rotate(model, 160.f, glm::vec3(0.f, 0.f, 1.f));
+					model = glm::translate(model, glm::vec3(10.f, 0.f, 1.f));
 					// Our ModelViewProjection : multiplication of our 3 matrices
-					//m_MVP = projection * view * model; // Remember, matrix multiplication is the other way around
+					m_MVP = projection * view * model; // Remember, matrix multiplication is the other way around
 					m_MW = model;
 					// Our vertices. Tree consecutive floats give a 3D vertex; Three consecutive vertices give a triangle.
 					// A cube has 6 faces with 2 triangles each, so this makes 6*2=12 triangles, and 12*3 vertices
@@ -82,10 +82,9 @@ Maya::Maya(std::vector<glm::vec3> & vertices,
 }
 
 
-void Maya::Draw(glm::mat4 vP)
+void Maya::Draw()
 {
 	glm::vec3 lightPosition(0.f,-15.f,27.f);
-	m_MVP = vP * m_MW;
 	glUseProgram(m_ProgramID);
 	GLuint positionID = glGetUniformLocation(m_ProgramID, "lightPosition");
 	glUniform3fv(positionID, 1, &lightPosition[0]);

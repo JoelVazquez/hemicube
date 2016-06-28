@@ -6,9 +6,9 @@ Model::Model(Maya* pMaya)
 	m_pMaya = pMaya;
 }
 
-void Model::Draw(glm::mat4 vP)
+void Model::Draw()
 {
-	m_pMaya->Draw(vP);
+	m_pMaya->Draw();
 }
 
 Model::~Model()
