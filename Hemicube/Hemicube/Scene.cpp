@@ -3,16 +3,14 @@
 
 Scene::Scene()
 {
-	m_pCamera = new camera();
+	m_pCamera = new Camera();
 }
 
 void Scene::Render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glm::mat4 view = m_pCamera->GetViewMatrix();
-	glm::mat4 vP = glm::perspective(45.0f, 4.0f / 3.0f, 0.1f, 100.0f) * view;
 	for (auto model : m_Models)
-		model->Draw(vP);
+		model->Draw();
 }
 
 
@@ -34,11 +32,11 @@ void Scene::LoadMaya(const char *pPath)
 	m_Mayas[std::string(pPath)] = new Maya(vertices, uvs, normals);
 }
 
-void Scene::AddCamera(camera *pCamera)
+void Scene::AddCamera(Camera *pCamera)
 {
 }
 
-camera * Scene::GetCamera()
+Camera * Scene::GetCamera()
 {
 	return m_pCamera;
 }

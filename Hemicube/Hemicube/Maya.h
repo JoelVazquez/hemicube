@@ -12,7 +12,7 @@ public:
 	Maya(std::vector<glm::vec3> & vertices,
 		std::vector<glm::vec2> & uvs,
 		std::vector<glm::vec3> & normals);
-	void Draw(glm::mat4 vP);
+	void Draw();
 	~Maya();
 private:	
 	unsigned int m_VertexsSize;
