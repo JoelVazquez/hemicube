@@ -6,8 +6,10 @@ class IGameState
 public:
 	virtual ~IGameState() {};
 	virtual void Update() = 0;
-	virtual void Render() = 0;
+	virtual void Render(double &delta) = 0;
 	virtual void handleKey(int &key, int &action) = 0;
+	virtual void handleMouse(double &xpos, double &ypos) = 0;
+
 };
 
 #endif

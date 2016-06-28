@@ -16,7 +16,7 @@ public:
 	void update(double &lag);
 	void handleKey(int &key, int &action);
 	void handleCursorPos(double &xpos, double &ypos);
-	void render();
+	void render(double &delta);
 	~Game();
 private:
 	class IGameState *current_state;
