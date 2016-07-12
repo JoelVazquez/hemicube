@@ -5,8 +5,11 @@
 #include <map>
 #include "Model.h"
 #include "Maya.h"
+#include "SkyBox.h"
 #include "Camera.h"
 #include "ObjLoader.h"
+
+
 class Scene
 {
 public:
@@ -19,13 +22,17 @@ public:
 	camera * GetCamera();
 	//Model* GetPlayer();
 	//std::vector<Model*> GetModels();
+	void RenderSkyBox();
 	~Scene();
 private:
 	std::vector<Model*> m_Models;
-	Model *m_Player;
+	Model *m_pPlayer;
+	SkyBox *m_pSkyBox;
 	std::map<std::string, Maya*> m_Mayas;
 	camera *m_pCamera;
 	ObjLoader m_Loader;
 };
+
+
 
 #endif

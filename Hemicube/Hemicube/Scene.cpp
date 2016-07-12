@@ -1,14 +1,26 @@
 #include "Scene.h"
 
 
+
+
+
+
 Scene::Scene()
 {
+	m_pSkyBox = new SkyBox();
 	m_pCamera = new camera();
+}
+void Scene::RenderSkyBox()
+{
+	glm::mat4 V = m_pCamera->GetViewMatrix();
+	glm::mat4 P = glm::perspective(45.0f, 4.0f / 3.0f, 0.1f, 100.0f);
+	m_pSkyBox->Draw(V,P);
 }
 
 void Scene::Render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	RenderSkyBox();
 	glm::mat4 view = m_pCamera->GetViewMatrix();
 	glm::mat4 vP = glm::perspective(45.0f, 4.0f / 3.0f, 0.1f, 100.0f) * view;
 	for (auto model : m_Models)
