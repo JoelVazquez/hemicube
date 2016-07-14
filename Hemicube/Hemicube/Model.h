@@ -1,6 +1,7 @@
 #ifndef MODEL_H
 #define MODEL_H
 #include "Maya.h"
+
 class Model
 {
 public:

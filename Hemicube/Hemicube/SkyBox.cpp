@@ -1,7 +1,7 @@
 #include "SkyBox.h"
 
-/*#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"*/
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
 
 float g_Points[] = {
 	-10.0f, 10.0f, -10.0f,
@@ -49,7 +49,7 @@ float g_Points[] = {
 
 SkyBox::SkyBox()
 {
-	/*create_cube_map(
+	create_cube_map(
 		"../negz.bmp",
 		"../posz.bmp",
 		"../posy.bmp",
@@ -66,13 +66,13 @@ SkyBox::SkyBox()
 	glBufferData(GL_ARRAY_BUFFER, 3 * 36 * sizeof(float), &g_Points, GL_STATIC_DRAW);
 	glEnableVertexAttribArray(0);
 	//glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);*/
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 }
 
 bool SkyBox::load_cube_map_side(
 	 GLenum side_target, const char* file_name
 	) {
-	/*glBindTexture(GL_TEXTURE_CUBE_MAP, m_TexCube);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, m_TexCube);
 
 	int x, y, n;
 	int force_channels = 4;
@@ -101,7 +101,7 @@ bool SkyBox::load_cube_map_side(
 		GL_UNSIGNED_BYTE,
 		image_data
 		);
-	free(image_data);*/
+	free(image_data);
 	return true;
 }
 
@@ -134,7 +134,7 @@ void SkyBox::create_cube_map(
 
 void SkyBox::Draw(glm::mat4 v, glm::mat4 p)
 {
-	/*glDepthMask(GL_FALSE);
+	glDepthMask(GL_FALSE);
 	glUseProgram(m_ProgramID);
 	//glm::mat4 vt = glm::transpose(v);
 	//glm::vec3 camPos(vt[0][3], vt[1][3], vt[2][3]);
@@ -149,7 +149,7 @@ void SkyBox::Draw(glm::mat4 v, glm::mat4 p)
 	glBindTexture(GL_TEXTURE_CUBE_MAP, m_TexCube);
 	glBindVertexArray(m_VAO);
 	glDrawArrays(GL_TRIANGLES, 0, 36);
-	glDepthMask(GL_TRUE);*/
+	glDepthMask(GL_TRUE);
 }
 
 

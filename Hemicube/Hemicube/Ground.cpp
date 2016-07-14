@@ -1,21 +1,23 @@
 #include "Ground.h"
-
-
-#define STB_IMAGE_IMPLEMENTATION
+//#define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
+
+
 float g_Ground[] = {
-	-10.0f,-5.0f,  -10.0f,		0.0f,0.0f, 
-	-10.0f, -5.0f, 10.0f,		0.0f, 1.0f,
-	10.0f, -5.0f, -10.0f,		1.0f, 0.0f,
-	10.0f, -5.0f, -10.0f,		1.0f, 0.0f,
-	-10.0f, -5.0f, 10.0f,		0.0f, 1.0f,
-	10.0f, -5.0f, 10.0f,		1.0f, 1.0f,
+	-10.0f, -5.0f, -10.0f, 0.0f, 0.0f,
+	-10.0f, -5.0f, 10.0f, 0.0f, 1.0f,
+	10.0f, -5.0f, -10.0f, 1.0f, 0.0f,
+	10.0f, -5.0f, -10.0f, 1.0f, 0.0f,
+	-10.0f, -5.0f, 10.0f, 0.0f, 1.0f,
+	10.0f, -5.0f, 10.0f, 1.0f, 1.0f,
 };
 
 
 Ground::Ground()
 {
+	LoadTexture("../ground.png");
 	m_ProgramID = LoadShaders("../ground.vertexshader", "../ground.fragmentshader");
+
 	glGenVertexArrays(1, &m_VAO);
 	glBindVertexArray(m_VAO);
 	glGenBuffers(1, &m_VBO);
@@ -26,13 +28,14 @@ Ground::Ground()
 	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *)(3 * sizeof(float)));
 
-	LoadTexture("../ground.bmp");
+	
 }
 
 bool Ground::LoadTexture( const char* file_name)
 {
-	glActiveTexture(GL_TEXTURE0);
+	
 	glGenTextures(1, &m_TexHeight);
+	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, m_TexHeight);
 	int x, y, n;
 	int force_channels = 4;
@@ -50,17 +53,8 @@ bool Ground::LoadTexture( const char* file_name)
 	}*/
 	printf("%d",x);
 	// copy image data into 'target' side of cube map
-	glTexSubImage2D(
-		GL_TEXTURE_2D,
-		0,
-		0,
-		0,
-		x,
-		y,
-		GL_RGBA,
-		GL_UNSIGNED_BYTE,
-		&image_data
-		);
+
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, x, y, 0, GL_RGBA, GL_UNSIGNED_BYTE, image_data);
 	free(image_data);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -76,8 +70,8 @@ void Ground::Draw(glm::mat4 v, glm::mat4 p)
 	glUseProgram(m_ProgramID);
 	glUniformMatrix4fv(glGetUniformLocation(m_ProgramID, "P"), 1, GL_FALSE, &p[0][0]);
 	glUniformMatrix4fv(glGetUniformLocation(m_ProgramID, "V"), 1, GL_FALSE, &v[0][0]);
-	glUniform1i(glGetUniformLocation(m_ProgramID, "cube_texture"), 0);
-	glActiveTexture(GL_TEXTURE0);
+	glUniform1i(glGetUniformLocation(m_ProgramID, "cube_texture"), 1);
+	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, m_TexHeight);
 	glBindVertexArray(m_VAO);
 	glDrawArrays(GL_TRIANGLES, 0, 6);
