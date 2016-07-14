@@ -9,8 +9,8 @@ PlayingState::PlayingState(Game* pGame)
 	m_pScene = new Scene();
 	m_pScene->LoadMaya("man.obj");
 	m_pScene->AddModel("man.obj");
-	m_pScene->LoadMaya("cube.obj");
-	m_pScene->AddModel("cube.obj");
+	//m_pScene->LoadMaya("cube.obj");
+	//m_pScene->AddModel("cube.obj");
 }
 
 void PlayingState::handleKey(int &key, int &action)

@@ -10,6 +10,6 @@ out vec3 color;
 void main(){
 
 	float bright = dot(normal,normalize(lightPosition - position));
-	color = vec3(bright*1.0,bright*0.0,bright*0.0);
+	color = vec3(bright*0.0,bright*.5,bright*0.5);
 
 }
