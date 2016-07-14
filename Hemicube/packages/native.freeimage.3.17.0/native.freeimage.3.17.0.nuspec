@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>native.freeimage</id>
+    <version>3.17.0</version>
+    <title>FreeImage Native</title>
+    <authors>FreeImage</authors>
+    <owners>FreeImage</owners>
+    <licenseUrl>http://freeimage.sourceforge.net/license.html</licenseUrl>
+    <projectUrl>http://freeimage.sourceforge.net/</projectUrl>
+    <iconUrl>http://freeimage.sourceforge.net/images/logo.jpg</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>FreeImage is an Open Source library project for developers who would like to support popular graphics image formats like
+		PNG, BMP, JPEG, TIFF and others as needed by today's multimedia applications. FreeImage is easy to use, fast, multithreading safe, compatible with all 32-bit or 64-bit versions of Windows, and cross-platform (works both with Linux and Mac OS X).</description>
+    <summary>FreeImage is an Open Source library project for developers who would like to support popular graphics image formats like PNG, BMP, JPEG, TIFF and others as needed by today's multimedia applications.</summary>
+    <releaseNotes>Initial package creation</releaseNotes>
+    <copyright>Copyright 2016</copyright>
+    <tags>CoApp native freeimage nativepackage</tags>
+    <dependencies>
+      <dependency id="native.freeimage.redist" version="3.17.0" />
+    </dependencies>
+  </metadata>
+</package>

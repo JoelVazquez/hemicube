@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>native.freeimage.redist</id>
+    <version>3.17.0</version>
+    <title>FreeImage Redist</title>
+    <authors>FreeImage</authors>
+    <owners>FreeImage</owners>
+    <licenseUrl>http://freeimage.sourceforge.net/license.html</licenseUrl>
+    <projectUrl>http://freeimage.sourceforge.net/</projectUrl>
+    <iconUrl>http://freeimage.sourceforge.net/images/logo.jpg</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Redistributable components for package 'freeimage'. This package should only be installed as a dependency. 
+(This is not the package you are looking for).</description>
+    <summary>Redistributable components for for package 'freeimage'</summary>
+    <releaseNotes>Initial package creation</releaseNotes>
+    <copyright>Copyright 2016</copyright>
+    <tags>CoApp native freeimage nativepackage</tags>
+  </metadata>
+</package>

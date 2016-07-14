@@ -8,6 +8,7 @@
 #include "SkyBox.h"
 #include "Camera.h"
 #include "ObjLoader.h"
+#include "Ground.h"
 
 
 class Scene
@@ -28,6 +29,7 @@ private:
 	std::vector<Model*> m_Models;
 	Model *m_pPlayer;
 	SkyBox *m_pSkyBox;
+	Ground *m_pGround;
 	std::map<std::string, Maya*> m_Mayas;
 	camera *m_pCamera;
 	ObjLoader m_Loader;

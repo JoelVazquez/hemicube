@@ -8,6 +8,7 @@
 Scene::Scene()
 {
 	m_pSkyBox = new SkyBox();
+	m_pGround = new Ground();
 	m_pCamera = new camera();
 }
 void Scene::RenderSkyBox()
@@ -23,6 +24,7 @@ void Scene::Render()
 	RenderSkyBox();
 	glm::mat4 view = m_pCamera->GetViewMatrix();
 	glm::mat4 vP = glm::perspective(45.0f, 4.0f / 3.0f, 0.1f, 100.0f) * view;
+	m_pGround->Draw(view, glm::perspective(45.0f, 4.0f / 3.0f, 0.1f, 100.0f));
 	for (auto model : m_Models)
 		model->Draw(vP);
 }

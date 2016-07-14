@@ -3,12 +3,13 @@
 #include "Maya.h"
 #include <iostream>
 
+
 class SkyBox
 {
 public:
 	SkyBox();
 	bool load_cube_map_side(
-		GLuint texture, GLenum side_target, const char* file_name
+		 GLenum side_target, const char* file_name
 		);
 	void create_cube_map(
 		const char* front,
@@ -16,8 +17,7 @@ public:
 		const char* top,
 		const char* bottom,
 		const char* left,
-		const char* right,
-		GLuint* tex_cube
+		const char* right
 		);
 	void Draw(glm::mat4 v, glm::mat4 p);
 	~SkyBox();

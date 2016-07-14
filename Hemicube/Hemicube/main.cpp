@@ -1,6 +1,8 @@
 #include "Game.h"
 
 
+
+
 const char *Name = "yo que se...";
 GLFWwindow* windows = NULL;
 Game* game;

@@ -1,0 +1,9 @@
+#version 420
+
+in vec2 texcoords;
+layout (binding = 0) uniform sampler2D cube_texture;
+out vec4 frag_colour;
+
+void main () {
+  frag_colour = texture(cube_texture, texcoords);
+}

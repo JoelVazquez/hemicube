@@ -1,6 +1,7 @@
 #include "SkyBox.h"
-#define STB_IMAGE_IMPLEMENTATION    
-#include "stb_image.h"
+
+/*#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"*/
 
 float g_Points[] = {
 	-10.0f, 10.0f, -10.0f,
@@ -48,14 +49,13 @@ float g_Points[] = {
 
 SkyBox::SkyBox()
 {
-	create_cube_map(
+	/*create_cube_map(
 		"../negz.bmp",
 		"../posz.bmp",
 		"../posy.bmp",
 		"../negy.bmp",
 		"../negx.bmp",
-		"../posx.bmp",
-		&m_TexCube
+		"../posx.bmp"
 		);
 
 	m_ProgramID = LoadShaders("../sky.vertexshader", "../sky.fragmentshader");
@@ -66,13 +66,13 @@ SkyBox::SkyBox()
 	glBufferData(GL_ARRAY_BUFFER, 3 * 36 * sizeof(float), &g_Points, GL_STATIC_DRAW);
 	glEnableVertexAttribArray(0);
 	//glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);*/
 }
 
 bool SkyBox::load_cube_map_side(
-	GLuint texture, GLenum side_target, const char* file_name
+	 GLenum side_target, const char* file_name
 	) {
-	glBindTexture(GL_TEXTURE_CUBE_MAP, texture);
+	/*glBindTexture(GL_TEXTURE_CUBE_MAP, m_TexCube);
 
 	int x, y, n;
 	int force_channels = 4;
@@ -101,7 +101,7 @@ bool SkyBox::load_cube_map_side(
 		GL_UNSIGNED_BYTE,
 		image_data
 		);
-	free(image_data);
+	free(image_data);*/
 	return true;
 }
 
@@ -111,20 +111,19 @@ void SkyBox::create_cube_map(
 	const char* top,
 	const char* bottom,
 	const char* left,
-	const char* right,
-	GLuint* tex_cube
+	const char* right
 	) {
 	// generate a cube-map texture to hold all the sides
 	glActiveTexture(GL_TEXTURE0);
-	glGenTextures(1, tex_cube);
+	glGenTextures(1, &m_TexCube);
 
 	// load each image and copy into a side of the cube-map texture
-	load_cube_map_side(*tex_cube, GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, front);
-	load_cube_map_side(*tex_cube, GL_TEXTURE_CUBE_MAP_POSITIVE_Z, back);
-	load_cube_map_side(*tex_cube, GL_TEXTURE_CUBE_MAP_POSITIVE_Y, top);
-	load_cube_map_side(*tex_cube, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, bottom);
-	load_cube_map_side(*tex_cube, GL_TEXTURE_CUBE_MAP_NEGATIVE_X, left);
-	load_cube_map_side(*tex_cube, GL_TEXTURE_CUBE_MAP_POSITIVE_X, right);
+	load_cube_map_side(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, front);
+	load_cube_map_side(GL_TEXTURE_CUBE_MAP_POSITIVE_Z, back);
+	load_cube_map_side(GL_TEXTURE_CUBE_MAP_POSITIVE_Y, top);
+	load_cube_map_side(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, bottom);
+	load_cube_map_side(GL_TEXTURE_CUBE_MAP_NEGATIVE_X, left);
+	load_cube_map_side(GL_TEXTURE_CUBE_MAP_POSITIVE_X, right);
 	// format cube map texture
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -135,7 +134,7 @@ void SkyBox::create_cube_map(
 
 void SkyBox::Draw(glm::mat4 v, glm::mat4 p)
 {
-	glDepthMask(GL_FALSE);
+	/*glDepthMask(GL_FALSE);
 	glUseProgram(m_ProgramID);
 	//glm::mat4 vt = glm::transpose(v);
 	//glm::vec3 camPos(vt[0][3], vt[1][3], vt[2][3]);
@@ -150,7 +149,7 @@ void SkyBox::Draw(glm::mat4 v, glm::mat4 p)
 	glBindTexture(GL_TEXTURE_CUBE_MAP, m_TexCube);
 	glBindVertexArray(m_VAO);
 	glDrawArrays(GL_TRIANGLES, 0, 36);
-	glDepthMask(GL_TRUE);
+	glDepthMask(GL_TRUE);*/
 }
 
 
