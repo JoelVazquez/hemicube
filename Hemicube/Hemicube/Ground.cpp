@@ -16,7 +16,8 @@ float g_Ground[] = {
 Ground::Ground()
 {
 	LoadTexture("../ground.png");
-	m_ProgramID = LoadShaders("../ground.vertexshader", "../ground.fragmentshader");
+	m_ProgramID = LoadShadersTesselation("../ground.vertexshader", "../ground.fragmentshader"
+		, "../ground.TCSshader", "../ground.TESshader");
 
 	glGenVertexArrays(1, &m_VAO);
 	glBindVertexArray(m_VAO);
@@ -51,10 +52,23 @@ bool Ground::LoadTexture( const char* file_name)
 			stderr, "WARNING: image %s is not power-of-2 dimensions\n", file_name
 			);
 	}*/
-	printf("%d",x);
+	printf("%d", x);
 	// copy image data into 'target' side of cube map
+	glTexStorage2D(GL_TEXTURE_2D, // 2D texture 
+		1, // 1 mipmap level 
+		GL_RGBA8, // 8-bit RGBA data 
+		x, y); // x x y texels 
+	glTexSubImage2D(GL_TEXTURE_2D, // 2D texture 
+		0, // Level 0 
+		0, 0, // Offset 0, 0 
+		x, y, // x x y texels, replace entire image 
+		GL_RGBA, // Four channel data 
+		GL_UNSIGNED_BYTE, // UNSIGNED CHAR data 
+		image_data); // Pointer to data
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, x, y, 0, GL_RGBA, GL_UNSIGNED_BYTE, image_data);
+
+
+	/*glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, x, y, 0, GL_RGBA, GL_UNSIGNED_BYTE, image_data);*/
 	free(image_data);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -74,7 +88,10 @@ void Ground::Draw(glm::mat4 v, glm::mat4 p)
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, m_TexHeight);
 	glBindVertexArray(m_VAO);
-	glDrawArrays(GL_TRIANGLES, 0, 6);
+	//glDrawArrays(GL_TRIANGLES, 0, 6);
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glDrawArrays(GL_PATCHES, 0, 6);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 Ground::~Ground()
 {
